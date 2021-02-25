@@ -1,0 +1,109 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Test</title>
+</head>
+
+<body>
+
+
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModalLabel">Commander</h5>
+                    <h4>{{message}}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3 align-items-center mb-3">
+                        <div class="col-4">
+                            <label for="fullname" class="col-form-label">Name:</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" id="fullname" class="form-control" aria-describedby="fullnameHelp">
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center  mb-3">
+                        <div class="col-4">
+                            <label for="priceht" class="col-form-label">Price ht:</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" id="priceht" class="form-control" aria-describedby="pricehtHelp">
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center  mb-3">
+                        <div class="col-4">
+                            <label for="stockavailable" class="col-form-label">Stock available:</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" id="stockavailable" class="form-control" aria-describedby="stockavailableHelp">
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center  mb-3">
+                        <div class="col-4">
+                            <label for="stockordered" class="col-form-label">Stock ordered:</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" id="fullname" class="form-control" aria-describedby="fullnameHelp">
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-4">
+                            <label for="tva" class="col-form-label">Tva:</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" id="tva" class="form-control" aria-describedby="tvaHelp">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="addButton" class="btn btn-primary">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $('#formModal').modal('show')
+    </script>
+
+    <script type="text/javascript">
+        $('#addButton').click(function (even){
+            event.preventDefault();
+            makeAjaxRequest();
+        });
+        function makeAgaxRequest(){
+            $.ajax({
+                url:"store/",
+                type: 'POST',
+                success: function(data){
+                    "done success"
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
