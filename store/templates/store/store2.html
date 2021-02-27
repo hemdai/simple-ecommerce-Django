@@ -16,6 +16,8 @@
 <body>
 
 
+<form action="/store/" method="POST">
+    {% csrf_token %}
     <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -28,51 +30,69 @@
                     <div class="row g-3 align-items-center mb-3">
                         <div class="col-4">
                             <label for="fullname" class="col-form-label">Name:</label>
+
                         </div>
                         <div class="col-8">
-                            <input type="text" id="fullname" class="form-control" aria-describedby="fullnameHelp">
+<!--                            <input type="text" id="fullname" class="form-control" aria-describedby="fullnameHelp">-->
+                            {{form.product_name}}
                         </div>
                     </div>
                     <div class="row g-3 align-items-center  mb-3">
                         <div class="col-4">
                             <label for="priceht" class="col-form-label">Price ht:</label>
+
                         </div>
                         <div class="col-8">
-                            <input type="text" id="priceht" class="form-control" aria-describedby="pricehtHelp">
+<!--                            <input type="text" id="priceht" class="form-control" aria-describedby="pricehtHelp">-->
+                            {{form.price_ex_tax}}
                         </div>
                     </div>
                     <div class="row g-3 align-items-center  mb-3">
                         <div class="col-4">
                             <label for="stockavailable" class="col-form-label">Stock available:</label>
+
                         </div>
                         <div class="col-8">
-                            <input type="text" id="stockavailable" class="form-control" aria-describedby="stockavailableHelp">
+<!--                            <input type="text" id="stockavailable" class="form-control" aria-describedby="stockavailableHelp">-->
+                            {{form.maximum_stock_available}}
                         </div>
                     </div>
                     <div class="row g-3 align-items-center  mb-3">
                         <div class="col-4">
-                            <label for="stockordered" class="col-form-label">Stock ordered:</label>
+                            <label  class="col-form-label">Stock ordered:</label>
+
                         </div>
                         <div class="col-8">
-                            <input type="text" id="fullname" class="form-control" aria-describedby="fullnameHelp">
+<!--                            <input type="text" id="fullName" class="form-control" aria-describedby="fullnameHelp">-->
+                            {{form.ordered_stock}}
                         </div>
                     </div>
                     <div class="row g-3 align-items-center">
                         <div class="col-4">
+
                             <label for="tva" class="col-form-label">Tva:</label>
+
                         </div>
                         <div class="col-8">
-                            <input type="text" id="tva" class="form-control" aria-describedby="tvaHelp">
+<!--                            <input type="text" id="tva" class="form-control" aria-describedby="tvaHelp">-->
+
+<!--                            <select name="vat" id="id_vat">-->
+<!--                            <option value="5.5">5.5</option>-->
+<!--                            <option value="20">20</option>-->
+                                {{form.vat}}
+
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="addButton" class="btn btn-primary">Ajouter</button>
+                    <input type="submit" id="addButton" class="btn btn-primary" value="Ajouter">
+                    <input type="submit" id="addButton1" class = "btn btn-primary" value="Ajouter">
                 </div>
             </div>
         </div>
     </div>
+    </form>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -43,8 +43,10 @@
                                 <td> {{product.product_name}}</td>
                                 <td> {{product.price_inc_vat}} &euro;</td>
                                 <td>
-                                    <select class="form-select" aria-label="Default select example">
-                                            <option> Quantity </option>
+                                    <select id={{forloop.counter0}} class="form-select" aria-label="Default select example">
+                                            {% for i in ''|center:product.stock_available %}
+                                            <option> {{forloop.counter0}} </option>
+                                            {% endfor %}
                                     </select>
                                 </td>
                             </tr>
