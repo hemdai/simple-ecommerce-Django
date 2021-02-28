@@ -21,7 +21,7 @@ class Product(models.Model):
 
     @property
     def price_inc_vat(self):
-        price = (self.price_ex_tax * self.vat)
+        price = (self.price_ex_tax * self.vat//100) + self.price_ex_tax
         return "%.2f" % round(price, 2)
 
     @property
@@ -40,6 +40,7 @@ class Item(models.Model):
 
     @property
     def total_ttc(self):
-        return self.product.price_inc_tax * self.quantity
+        price_tax = self.product.price_inc_vat
+        return float(price_tax) * float(self.quantity)
 
 

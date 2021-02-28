@@ -1,56 +1,97 @@
-{% extends 'store/main.html' %}
 {% load static %}
+<!doctype html>
+<html lang="en">
 
-{% block bodyblock %}
- <div class="row">
-		<div class="col-lg-12">
-			<div class="box-element">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-				<a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+    <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-				<br>
-				<br>
-				<table class="table">
-					<tr>
-						<th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
-						<th><h5>Total:<strong>Rs{{order.get_cart_total|floatformat:2}} </strong></h5></th>
-						<th>
-							<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
-						</th>
-					</tr>
-				</table>
+    <title>Test</title>
+</head>
 
-			</div>
+<body>
+<form>
+    <div class="modal fade shows" id="tableModal" tabindex="-1" aria-labelledby="tableModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tableModalLabel">Table</h5>
 
-			<br>
-			<div class="box-element">
+                </div>
+                <div class="modal-body">
+                        {% csrf_token %}
+                    <table class="table" id="cart-table" data-cart="{{products | length}}">
+                        <div>
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Produit</th>
+                                <th scope="col">Prix</th>
+                                <th scope="col">Quantite</th>
+                            </tr>
 
-				<div class="cart-row">
-					<div style="flex:2"></div>
-					<div style="flex:2"><strong>Item</strong></div>
-					<div style="flex:1"><strong>Price</strong></div>
-					<div style="flex:1"><strong>Quantity</strong></div>
-					<div style="flex:1"><strong>Total</strong></div>
-				</div>
-				{% for item in items %}
-				<div class="cart-row">
-					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
-					<div style="flex:2"><p>{{item.product.name}}</p></div>
-					<div style="flex:1"><p>Rs{{item.product.price|floatformat:2}}</p></div>
-					<div style="flex:1">
-						<p class="quantity">x{{item.quantity}}</p>
-						<div class="quantity">
-							<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static 'media/arrow-up.png' %}">
+                        </thead>
+                        </div>
+                        {% for product in products %}
+                        <div>
+                        <tbody>
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td> {{product.product_name}}</td>
+                                <td id="item-price-{{forloop.counter}}"> {{product.price_inc_vat}} &euro;</td>
+                                <td>
+                                    <select data-product="{{product.id}}" id="select-{{forloop.counter}}" class="form-select" aria-label="Default select example">
+                                            {% for i in ''|center:product.stock_available %}
+                                            <option> {{forloop.counter0}} </option>
+                                            {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            </div>
+                        {% endfor %}
 
-							<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static 'media/arrow-down.png' %}">
-						</div>
-					</div>
-					<div style="flex:1"><p>Rs{{item.get_total|floatformat:2}}</p></div>
-				</div>
 
-				{% endfor %}
+                            <tr>
+                                <th scope="row"></th>
+                                <td>
+                                    TOTAL
+                                </td>
+                                <td id="total-price">
 
-			</div>
-		</div>
-	</div>
-{% endblock %}
+                                </td>
+                                <td id="total-qty">
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" id="orderbtn" class = "btn btn-primary" value="Commander">
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script  src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/cart2.js' %}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+        $('#tableModal').modal('show')})
+    </script>
+
+
+</body>
+
+</html>
